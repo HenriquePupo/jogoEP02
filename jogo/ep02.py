@@ -23,3 +23,9 @@ while jogando:
         if resposta == sorteado:
             print('voce acertou')
             jogando = False
+
+        if resposta =! sorteado:
+            print(reposta)
+
+        if resposta not in dados:
+            print('pais desconhecido')

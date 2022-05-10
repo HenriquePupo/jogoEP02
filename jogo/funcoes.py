@@ -1,5 +1,6 @@
 import math
 import random
+import json
 
 def normaliza(cont):
     dic={}
@@ -70,12 +71,56 @@ def haversine(raio, phi1, lambda1, phi2, lambda2):
 
     return d
 
-    def continuar ():
-        resposta = input('Que continuar?[s/n]')
-        if resposta == 'n':
-            print('Ate a proxima!')
-        if resposta == 's':
-            print('Um pais foi escolhido')
-        else:
-            print('escolha outra resposta')
-            
+def continuar ():
+    resposta = input('Quer continuar?[s/n]')
+    if resposta == 'n':
+        print('Ate a proxima!')
+    if resposta == 's':
+        print('Um pais foi escolhido')
+    else:
+        print('escolha outra resposta')
+
+# funcao da dica             
+def funcao_dica(tentativas,dados,paissorteado):
+    tentativasgastas=0
+    listacores=[]
+    print("Mercado de Dicas:")
+    print("----------------------------------------")
+    cor = "1. Cor da bandeira  - custa 4 tentativas"
+    print(cor)
+    letra = "2. Letra da capital - custa 3 tentativas"
+    print(letra)
+    area = "3. Área             - custa 6 tentativas"
+    print(area)
+    pop = "4. População        - custa 5 tentativas"
+    print(pop)
+    cont = "5. Continente       - custa 7 tentativas"
+    print(cont)
+    print("0. Sem dica")
+    print("----------------------------------------")
+    resposta = input(" escolha: |1|2|3|4|5|0| ")
+
+    cordabandeira=dados[paissorteado]["bandeira"]
+    for cor, num in cordabandeira.items():
+        if num > 0 and cor != "outras":
+            listacores.append(cor)
+    if resposta == '1':
+        tentativasgastas +=4
+        for cor, num in cordabandeira.items():
+            if num > 0 and cor != "outras":
+                listacores.append(cor)
+        corsorteada=random.choice(listacores)
+        listacores.remove(corsorteada)
+        dica=corsorteada 
+
+
+    return [tentativasgastas,dica,listacores]
+
+
+def lista_de_cores(dados,paissorteado):
+    listacores=[]
+    cordabandeira=dados[paissorteado]["bandeira"]
+    for cor, num in cordabandeira.items():
+        if num > 0 and cor != "outras":
+            listacores.append(cor)
+    return listacores

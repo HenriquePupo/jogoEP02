@@ -15,14 +15,29 @@ while jogando:
     tentativas = 20
     sorteado = funcoes.sorteia_pais(dadosnormalizados)
     print(sorteado)
-
+    dicas=' '
+    dicacoresdabandeira = " "
     while tentativas > 0:
-
+        
+        print(" ")
+        print("dicas: " + "{} ".format(dicacoresdabandeira))
+        print(" ")
+        print("suas tentativas {}".format(tentativas))
+        print(" ")
         resposta = input('Qual seu palpite? ')
 
         if resposta == sorteado:
             print('voce acertou')
             jogando = False
+            
 
-        elif resposta not in dadosnormalizados.keys():
+        elif resposta not in dadosnormalizados.keys() and resposta != "dica":
             print('pais desconhecido')
+
+        elif resposta == "dica":
+            funcao_dicas=funcoes.funcao_dica(tentativas,dadosnormalizados,sorteado)
+            tentativas -= funcao_dicas[0]
+            dicacoresdabandeira = dicacoresdabandeira + ", " + "{}".format(funcao_dicas[1]) 
+            listacores = funcao_dicas[2]
+        else:
+            tentativas-=1

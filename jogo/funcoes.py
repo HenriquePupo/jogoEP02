@@ -69,3 +69,13 @@ def haversine(raio, phi1, lambda1, phi2, lambda2):
     d = 2 * raio * math.asin((pt)**(1/2))
 
     return d
+
+    def continuar ():
+        resposta = input('Que continuar?[s/n]')
+        if resposta == 'n':
+            print('Ate a proxima!')
+        if resposta == 's':
+            print('Um pais foi escolhido')
+        else:
+            print('escolha outra resposta')
+            

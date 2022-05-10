@@ -13,19 +13,16 @@ jogando = True
 while jogando:
 
     tentativas = 20
-    sorteado = funcoes.sorteia_pais(dados)
+    sorteado = funcoes.sorteia_pais(dadosnormalizados)
     print(sorteado)
 
     while tentativas > 0:
 
-        resposta = input('Qual o seu palpite? ')
+        resposta = input('Qual seu palpite? ')
 
         if resposta == sorteado:
             print('voce acertou')
             jogando = False
 
-        if resposta =! sorteado:
-            print(reposta)
-
-        if resposta not in dados:
+        elif resposta not in dadosnormalizados.keys():
             print('pais desconhecido')

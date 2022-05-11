@@ -22,6 +22,7 @@ while jogando:
         
         print(" ")
         print("dicas: " + "{} ".format(dicacoresdabandeira))
+        print('dicas: '+'{}'.format())
         print(" ")
         print("suas tentativas {}".format(tentativas))
         print(" ")

@@ -3,7 +3,7 @@ import math
 import random
 import funcoes
 
-with open('dados.json','r') as arq:
+with open('jogo/dados.json','r') as arq:
     dados = arq.read()
 dados = json.loads(dados)
 
@@ -22,7 +22,6 @@ while jogando:
         
         print(" ")
         print("dicas: " + "{} ".format(dicacoresdabandeira))
-        print('dicas: '+'{}'.format())
         print(" ")
         print("suas tentativas {}".format(tentativas))
         print(" ")

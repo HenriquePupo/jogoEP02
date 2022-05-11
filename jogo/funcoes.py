@@ -104,18 +104,11 @@ def funcao_dica(tentativas,dados,paissorteado):
     print("----------------------------------------")
     resposta = input(" escolha: |1|2|3|4|5|0| ")
 
-    cordabandeira=dados[paissorteado]["bandeira"]
-    for cor, num in cordabandeira.items():
-        if num > 0 and cor != "outras":
-            listacores.append(cor)
+    
     if resposta == '1':
-        tentativasgastas +=4
-        for cor, num in cordabandeira.items():
-            if num > 0 and cor != "outras":
-                listacores.append(cor)
-        corsorteada=random.choice(listacores)
-        listacores.remove(corsorteada)
-        dica=corsorteada 
+        tentativasgastas += 4
+        corsorteada = lista_de_cores(dados, paissorteado)
+        dica = corsorteada 
 
     elif resposta == '2':
         tentativasgastas += 3
@@ -141,4 +134,4 @@ def lista_de_cores(dados,paissorteado):
     for cor, num in cordabandeira.items():
         if num > 0 and cor != "outras":
             listacores.append(cor)
-    return listacores
+    return listacores 

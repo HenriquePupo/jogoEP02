@@ -3,7 +3,7 @@ import math
 import random
 import funcoes
 
-with open('jogo/dados.json','r') as arq:
+with open('dados.json','r') as arq:
     dados = arq.read()
 dados = json.loads(dados)
 

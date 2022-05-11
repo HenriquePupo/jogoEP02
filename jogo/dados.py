@@ -1,4 +1,7 @@
-{
+EARTH_RADIUS = 6371
+
+def dados():
+  return {
   "asia": {
     "afeganistao": {
       "area": 652230,

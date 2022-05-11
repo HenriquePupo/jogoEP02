@@ -17,6 +17,7 @@ while jogando:
     print(sorteado)
     dicas=' '
     dicacoresdabandeira = " "
+
     while tentativas > 0:
         
         print(" ")
@@ -30,14 +31,18 @@ while jogando:
             print('voce acertou')
             jogando = False
             
-
         elif resposta not in dadosnormalizados.keys() and resposta != "dica":
             print('pais desconhecido')
 
         elif resposta == "dica":
+            print(sorteado)
             funcao_dicas=funcoes.funcao_dica(tentativas,dadosnormalizados,sorteado)
             tentativas -= funcao_dicas[0]
             dicacoresdabandeira = dicacoresdabandeira + ", " + "{}".format(funcao_dicas[1]) 
             listacores = funcao_dicas[2]
+            capital = funcao_dicas[3]
+            
+
+
         else:
             tentativas-=1

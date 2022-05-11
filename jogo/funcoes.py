@@ -113,9 +113,20 @@ def funcao_dica(tentativas,dados,paissorteado):
         listacores.remove(corsorteada)
         dica=corsorteada 
 
+    elif resposta == '2':
+        tentativasgastas += 3
+        letra_capital = funcao_capital(paissorteado, dados)
+        dica=letra_capital
 
-    return [tentativasgastas,dica,listacores]
+    elif resposta == '3':
+        tentativas += 
 
+    return [tentativasgastas,dica,listacores, letra_capital]
+
+def funcao_capital(paissorteado, dados):
+    capital = dados[paissorteado]['capital']
+    dica_2 = sorteia_letra(capital, []) 
+    return dica_2
 
 def lista_de_cores(dados,paissorteado):
     listacores=[]

@@ -41,7 +41,7 @@ while jogando:
             dicacoresdabandeira = dicacoresdabandeira + ", " + "{}".format(funcao_dicas[1]) 
             listacores = funcao_dicas[2]
             capital = funcao_dicas[3]
-            
+            area = funcao_dicas[3]
 
 
         else:

@@ -116,10 +116,13 @@ def funcao_dica(tentativas,dados,paissorteado):
     elif resposta == '2':
         tentativasgastas += 3
         letra_capital = funcao_capital(paissorteado, dados)
-        dica=letra_capital
+        dica = letra_capital
 
     elif resposta == '3':
-        tentativas += 
+        tentativas += 6
+        area = dados[paissorteado]['area']
+        dica = area
+        return [tentativasgastas,dica,listacores, area]
 
     return [tentativasgastas,dica,listacores, letra_capital]
 

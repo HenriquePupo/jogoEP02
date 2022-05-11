@@ -80,21 +80,25 @@ def continuar ():
     else:
         print('escolha outra resposta')
 
+
+
 # funcao da dica             
 def funcao_dica(tentativas,dados,paissorteado):
     tentativasgastas=0
     listacores=[]
+    cor = "1. Cor da bandeira  - custa 4 tentativas"
+    letra = "2. Letra da capital - custa 3 tentativas"
+    area = "3. Área             - custa 6 tentativas" 
+    pop = "4. População        - custa 5 tentativas"
+    cont = "5. Continente       - custa 7 tentativas"
+
+
     print("Mercado de Dicas:")
     print("----------------------------------------")
-    cor = "1. Cor da bandeira  - custa 4 tentativas"
     print(cor)
-    letra = "2. Letra da capital - custa 3 tentativas"
     print(letra)
-    area = "3. Área             - custa 6 tentativas"
     print(area)
-    pop = "4. População        - custa 5 tentativas"
     print(pop)
-    cont = "5. Continente       - custa 7 tentativas"
     print(cont)
     print("0. Sem dica")
     print("----------------------------------------")

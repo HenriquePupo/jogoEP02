@@ -22,7 +22,7 @@ while jogando:
     print(sorteado)
     dicas=' '
     dicacoresdabandeira = " "
-
+    lista_distancias = []
     while tentativas > 0:
         
         print(" ")
@@ -37,8 +37,10 @@ while jogando:
             jogando = False
         
         elif resposta in dadosnormalizados.keys():
-            distancia=haversine(EARTH_RADIUS, dadosnormalizados[sorteado]["geo"]["latitude"], dadosnormalizados[sorteado]["geo"]["longitude"], dadosnormalizados[resposta]["geo"]["latitude"], dadosnormalizados[resposta]["geo"]["longitude"] )
-            print(f'O país está a {distancia } kilometros de distancia')
+            distancia = haversine(EARTH_RADIUS, dadosnormalizados[sorteado]["geo"]["latitude"], dadosnormalizados[sorteado]["geo"]["longitude"], dadosnormalizados[resposta]["geo"]["latitude"], dadosnormalizados[resposta]["geo"]["longitude"] )
+            print(f'{0:.2f} km -> {1}'.format(distancia, resposta))
+            
+
 
         elif resposta not in dadosnormalizados.keys() and resposta != "dica":
             print('pais desconhecido')

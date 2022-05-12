@@ -1,7 +1,6 @@
 import json
 import math
 import random
-from termcolor import colored
 from funcoes import sorteia_pais
 from funcoes import normaliza
 from funcoes import haversine

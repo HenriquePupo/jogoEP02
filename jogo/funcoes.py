@@ -82,15 +82,35 @@ def continuar ():
 
 
 
+def inventario(cores_usadas,distancias, tentativas,letrasusadas):
+    dicas_usadas={
+        "cores": cores_usadas,
+        "letra": letrasusadas,
+    }
+    
+    print("distâncias: ")
+    print(" ")
+    print("dicas: - cores da bandeira: {}".format((', ').join(dicas_usadas["cores"])))
+    print("       - letras da capital: {}".format((", ").join(dicas_usadas["letra"])))
+
+    print(" ")
+    print("tentativas: - {}".format(tentativas))
+    print(" ")
+    return 
+
+
 # funcao da dica             
-def funcao_dica(tentativas,dados,paissorteado):
+def funcao_dica(tentativas,dadosnormalizados,sorteado,lista_cores,letrascapital):
     tentativasgastas=0
-    listacores=[]
     cor = "1. Cor da bandeira  - custa 4 tentativas"
     letra = "2. Letra da capital - custa 3 tentativas"
     area = "3. Área             - custa 6 tentativas" 
     pop = "4. População        - custa 5 tentativas"
     cont = "5. Continente       - custa 7 tentativas"
+    if lista_cores==[]:
+        cor = ""
+    if letrascapital==[]:
+        letra = ""
 
 
     print("Mercado de Dicas:")
@@ -102,36 +122,35 @@ def funcao_dica(tentativas,dados,paissorteado):
     print(cont)
     print("0. Sem dica")
     print("----------------------------------------")
-    resposta = input(" escolha: |1|2|3|4|5|0| ")
 
-    
-    if resposta == '1':
-        tentativasgastas += 4
-        corsorteada = lista_de_cores(dados, paissorteado)
-        dica = corsorteada 
+    return " "
 
-    elif resposta == '2':
-        tentativasgastas += 3
-        letra_capital = funcao_capital(paissorteado, dados)
-        dica = letra_capital
 
-    elif resposta == '3':
-        tentativas += 6
-        area = dados[paissorteado]['area']
-        dica = area
-        return [tentativasgastas,dica,listacores, area]
-
-    return [tentativasgastas,dica,listacores, letra_capital]
-
-def funcao_capital(paissorteado, dados):
-    capital = dados[paissorteado]['capital']
-    dica_2 = sorteia_letra(capital, []) 
-    return dica_2
-
-def lista_de_cores(dados,paissorteado):
-    listacores=[]
-    cordabandeira=dados[paissorteado]["bandeira"]
+def faz_lista_cores(dadosnormalizados,sorteado):
+    lista_cores=[]
+    cordabandeira = dadosnormalizados[sorteado]["bandeira"]
     for cor, num in cordabandeira.items():
         if num > 0 and cor != "outras":
-            listacores.append(cor)
-    return listacores 
+            lista_cores.append(cor)
+    return lista_cores
+
+def dica_1(lista_cores,coresusadas):
+    corsorteada = random.choice(lista_cores)
+    lista_cores.remove(corsorteada)
+    coresusadas.append(corsorteada)
+    
+    return [corsorteada,lista_cores,coresusadas]
+
+def faz_lista_letras(dadosnormalizados,sorteado):
+    letrascapital = []
+    capital = dadosnormalizados[sorteado]["capital"]
+    for i in capital:
+        letrascapital.append(i.lower())
+    return letrascapital
+
+def dica_2(letrascapital, letrasusadas):
+    letrasorteada = random.choice(letrascapital)
+    letrascapital.remove(letrasorteada)
+    letrasusadas.append(letrasorteada)
+    return [letrasorteada, letrascapital, letrasusadas]
+

@@ -62,23 +62,23 @@ while jogando:
             funcao_dicas = funcoes.funcao_dica(tentativas, dados, sorteado,lista_cores,letrascapital,areausada,popusada)
             print("")
             resposta = input("escolha: ")
-            if resposta == "1" and lista_cores != []:
+            if resposta == "1" and lista_cores != [] and tentativas > 4:
                 dica1 = funcoes.dica_1(lista_cores,cores_usadas)
                 lista_cores = dica1[1]
                 tentativas -= 4
 
-            if resposta == "2" and letrascapital != []:
+            if resposta == "2" and letrascapital != [] and tentativas > 3:
                 dica2=funcoes.dica_2(dadosnormalizados,sorteado, letrasusadas)
                 letrascapital.remove(dica2)
                 letrasusadas.append(dica2)
                 tentativas -= 3
             
-            if resposta == "3" and areausada==0:
+            if resposta == "3" and areausada==0 and tentativas > 6:
                 dica3 = funcoes.dica_3(dadosnormalizados,sorteado)
                 areausada+=1
                 tentativas -= 6
 
-            if resposta == "4" and popusada==0:
+            if resposta == "4" and popusada==0 and tentativas > 5:
                 dica4=funcoes.dica_4(dadosnormalizados,sorteado)
                 popusada += 1
                 tentativas -= 5

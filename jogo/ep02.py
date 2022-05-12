@@ -38,8 +38,22 @@ while jogando:
         
         elif resposta in dadosnormalizados.keys():
             distancia = haversine(EARTH_RADIUS, dadosnormalizados[sorteado]["geo"]["latitude"], dadosnormalizados[sorteado]["geo"]["longitude"], dadosnormalizados[resposta]["geo"]["latitude"], dadosnormalizados[resposta]["geo"]["longitude"] )
-            print(f'{0:.2f} km -> {1}'.format(distancia, resposta))
+            if distancia <= 1000:
+                print('\033[1;36m{0:.0f} -> {1}\033[m'.format(distancia, resposta))  
+            elif 1001 <= distancia <= 1999:
+                print('\033[1;33m{0:.0f} -> {1}\033[m'.format(distancia, resposta))
+            elif 2000 <= distancia <= 4999:
+                print('\033[1;31m{0:.0f} -> {1}\033[m'.format(distancia, resposta))
+            elif 5000 <= distancia <= 9999:
+                print('\033[1;35m{0:.0f} -> {1}\033[m'.format(distancia, resposta))
+            elif distancia <= 10000:
+                print('\033[1;37m{0:.0f} -> {1}\033[m'.format(distancia, resposta))            
             
+            # resp_cor = print('\033[1;37m{0:.0f} -> {1}\033[m'.format(distancia, resposta))            
+            # lista_distancias =[]
+            # if distancia not in lista_distancias:
+            #     lista_cores = lista_distancias.append(resp_cor)
+            #     print(lista_cores)
 
 
         elif resposta not in dadosnormalizados.keys() and resposta != "dica":

@@ -50,7 +50,8 @@ while jogando:
             elif 5000 <= distancia <= 9999:
                 print('\033[1;35m{0:.0f} -> {1}\033[m'.format(distancia, resposta))
             elif distancia <= 10000:
-                print('\033[1;37m{0:.0f} -> {1}\033[m'.format(distancia, resposta))   
+                print('\033[1;37m{0:.0f} -> {1}\033[m'.format(distancia, resposta))
+            tentativas -= 1   
 
         elif resposta not in dadosnormalizados.keys() and resposta != "dica":
             print('pais desconhecido')
@@ -71,5 +72,4 @@ while jogando:
 
 
                 
-            else:
-                tentativas-=1
+        

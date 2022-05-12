@@ -1,18 +1,13 @@
-import json
+
 import math
 import random
-import funcoes 
-from dados import EARTH_RADIUS
+import funcoes
 import dados
+from dados import EARTH_RADIUS
 
 dados = dados.dados()
 dadosnormalizados = funcoes.normaliza(dados)
 
-with open('dados.json','r') as arq:
-    dados = arq.read()
-dados = json.loads(dados)
-
-dadosnormalizados = funcoes.normaliza(dados)
 
 jogando = True
 while jogando:

@@ -24,16 +24,21 @@ while jogando:
     lista_cores=funcoes.faz_lista_cores(dadosnormalizados,sorteado)
     dicas_usadas = []
     vezes_usada = 0
-    cores_usadas=[]
+    cores_usadas = []
     letrascapital = funcoes.faz_lista_letras(dadosnormalizados,sorteado)
-    letrasusadas=[]
+    letrasusadas = []
+    lista_paises = []
+    areausada = 0
+    dica3 = ""
+    popusada = 0
+    dica4 = ""
 
     
 
     while tentativas > 0:
-        (funcoes.inventario(cores_usadas,distancias,tentativas,letrasusadas))
+        (funcoes.inventario(cores_usadas,distancias,tentativas,letrasusadas,dica3,dica4))
         
-        resposta = input('Qual seu palpite? ')
+        resposta = input('Qual seu palpite?: ')
 
         if resposta == sorteado:
             print('voce acertou')
@@ -41,6 +46,7 @@ while jogando:
 
         elif resposta in dadosnormalizados.keys():
             distancia = funcoes.haversine(EARTH_RADIUS, dadosnormalizados[sorteado]["geo"]["latitude"], dadosnormalizados[sorteado]["geo"]["longitude"], dadosnormalizados[resposta]["geo"]["latitude"], dadosnormalizados[resposta]["geo"]["longitude"] )
+            
             if distancia <= 1000:
                 print('\033[1;36m{0:.0f} -> {1}\033[m'.format(distancia, resposta))  
             elif 1001 <= distancia <= 1999:
@@ -57,7 +63,9 @@ while jogando:
             print('pais desconhecido')
 
         elif resposta == "dica":
-            funcao_dicas = funcoes.funcao_dica(tentativas, dados, sorteado,lista_cores,letrascapital)
+            print("")
+            funcao_dicas = funcoes.funcao_dica(tentativas, dados, sorteado,lista_cores,letrascapital,areausada,popusada)
+            print("")
             resposta = input("escolha: ")
             if resposta == "1" and lista_cores != []:
                 dica1 = funcoes.dica_1(lista_cores,cores_usadas)
@@ -65,10 +73,24 @@ while jogando:
                 tentativas -= 4
 
             if resposta == "2" and letrascapital != []:
-                dica2=funcoes.dica_2(letrascapital, letrasusadas)
-                letrascapital = dica2[1]
+                dica2=funcoes.dica_2(dadosnormalizados,sorteado, letrasusadas)
+                letrascapital.remove(dica2)
+                letrasusadas.append(dica2)
                 tentativas -= 3
-                
+            
+            if resposta == "3" and areausada==0:
+                dica3 = funcoes.dica_3(dadosnormalizados,sorteado)
+                areausada+=1
+                tentativas -= 6
+
+            if resposta == "4" and popusada==0:
+                dica4=funcoes.dica_4(dadosnormalizados,sorteado)
+                popusada += 1
+                tentativas -= 5
+
+    print("")
+    print("voce perdeu o pais era: {}".format(sorteado))
+    print("")
 
 
                 

@@ -82,36 +82,47 @@ def continuar ():
 
 
 
-def inventario(cores_usadas,distancias, tentativas,letrasusadas):
+def inventario(cores_usadas,distancias, tentativas,letrasusadas,dica3,dica4):
     dicas_usadas={
         "cores": cores_usadas,
         "letra": letrasusadas,
+        "area": dica3,
+        "pop": dica4,
     }
     
     print("distâncias: ")
     print(" ")
-    print("dicas: - cores da bandeira: {}".format((', ').join(dicas_usadas["cores"])))
-    print("       - letras da capital: {}".format((", ").join(dicas_usadas["letra"])))
-
+    print("dicas: ")  
+    if cores_usadas!= []: 
+        print("- cores da bandeira: {}".format((', ').join(dicas_usadas["cores"])))
+    if letrasusadas != []:
+        print("- letras da capital: {}".format((", ").join(dicas_usadas["letra"])))
+    if dica3 != "":
+        print("             - area: {}".format(dicas_usadas["area"] + " Km2"))
+    if dica4 != "":
+        print("        - populacao: {}".format(dicas_usadas["pop"]))
     print(" ")
-    print("tentativas: - {}".format(tentativas))
+    print("tentativas:  {}".format(tentativas))
     print(" ")
     return 
 
 
 # funcao da dica             
-def funcao_dica(tentativas,dadosnormalizados,sorteado,lista_cores,letrascapital):
+def funcao_dica(tentativas,dadosnormalizados,sorteado,lista_cores,letrascapital,areausada,popusada):
     tentativasgastas=0
     cor = "1. Cor da bandeira  - custa 4 tentativas"
     letra = "2. Letra da capital - custa 3 tentativas"
     area = "3. Área             - custa 6 tentativas" 
     pop = "4. População        - custa 5 tentativas"
     cont = "5. Continente       - custa 7 tentativas"
-    if lista_cores==[]:
+    if lista_cores==[] or tentativas <= 4:
         cor = ""
-    if letrascapital==[]:
+    if letrascapital==[] or tentativas <= 3:
         letra = ""
-
+    if areausada > 0 or tentativas <= 6:
+        area = ""
+    if popusada > 0 or tentativas <= 5:
+        pop = ""
 
     print("Mercado de Dicas:")
     print("----------------------------------------")
@@ -148,9 +159,18 @@ def faz_lista_letras(dadosnormalizados,sorteado):
         letrascapital.append(i.lower())
     return letrascapital
 
-def dica_2(letrascapital, letrasusadas):
-    letrasorteada = random.choice(letrascapital)
-    letrascapital.remove(letrasorteada)
-    letrasusadas.append(letrasorteada)
-    return [letrasorteada, letrascapital, letrasusadas]
 
+def dica_2(dadosnormalizados, sorteado,letrasusadas):
+
+    capital = dadosnormalizados[sorteado]["capital"]
+
+    x=sorteia_letra(capital, letrasusadas)
+    return x
+
+def dica_3(dadosnormalizados,sorteado):
+    area=str(dadosnormalizados[sorteado]["area"])
+    return area
+
+def dica_4(dadosnormalizados,sorteado):
+    populacao=str(dadosnormalizados[sorteado]["populacao"])
+    return populacao

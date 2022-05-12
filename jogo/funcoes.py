@@ -82,14 +82,17 @@ def continuar ():
 
 
 
-def inventario(cores_usadas,distancias, tentativas,letrasusadas,dica3,dica4):
+def inventario(cores_usadas,distancias, tentativas,letrasusadas,dica3,dica4,dica5):
     dicas_usadas={
         "cores": cores_usadas,
         "letra": letrasusadas,
         "area": dica3,
         "pop": dica4,
+        "cont": dica5
     }
     
+    print("-----------------------------")
+    print("INVENTARIO:")
     print("distâncias: ")
     print(" ")
     print("dicas: ")  
@@ -101,14 +104,17 @@ def inventario(cores_usadas,distancias, tentativas,letrasusadas,dica3,dica4):
         print("             - area: {}".format(dicas_usadas["area"] + " Km2"))
     if dica4 != "":
         print("        - populacao: {}".format(dicas_usadas["pop"]))
+    if dica5 != "":
+        print("       - continente: {}".format(dicas_usadas["cont"]))
     print(" ")
     print("tentativas:  {}".format(tentativas))
+    print("-----------------------------")
     print(" ")
     return 
 
 
 # funcao da dica             
-def funcao_dica(tentativas,dadosnormalizados,sorteado,lista_cores,letrascapital,areausada,popusada):
+def funcao_dica(tentativas,dadosnormalizados,sorteado,lista_cores,letrascapital,areausada,popusada,contusada):
     tentativasgastas=0
     cor = "1. Cor da bandeira  - custa 4 tentativas"
     letra = "2. Letra da capital - custa 3 tentativas"
@@ -123,6 +129,8 @@ def funcao_dica(tentativas,dadosnormalizados,sorteado,lista_cores,letrascapital,
         area = ""
     if popusada > 0 or tentativas <= 5:
         pop = ""
+    if contusada > 0 or tentativas <= 7:
+        cont = ""
 
     print("Mercado de Dicas:")
     print("----------------------------------------")
@@ -174,3 +182,7 @@ def dica_3(dadosnormalizados,sorteado):
 def dica_4(dadosnormalizados,sorteado):
     populacao=str(dadosnormalizados[sorteado]["populacao"])
     return populacao
+
+def dica_5(dadosnormalizados,sorteado):
+    cont=str(dadosnormalizados[sorteado]["continente"])
+    return cont

@@ -16,7 +16,7 @@ def sorteia_pais(dic):
         nl.append(pais)
     return random.choice(nl)
 
-def adiciona_em_ordem(pais,dist,lista):
+def adiciona_em_ordem( pais, dist, lista):
     nl=[pais, dist]
     i=0
     if nl not in lista:
@@ -32,13 +32,13 @@ def adiciona_em_ordem(pais,dist,lista):
     
     return lista
 
-def esta_na_lista(pais,lista):
+def esta_na_lista( pais, lista):
     for i in lista:
         if pais == i[0]:
             return True
     return False
 
-def sorteia_letra(palavras,l):
+def sorteia_letra( palavras, l):
     p=palavras.lower()
     lista=list(p)
     restritos=['.', ',', '-', ';', ' ']
@@ -54,7 +54,7 @@ def sorteia_letra(palavras,l):
             sorteio=random.choice(lista)
     return sorteio
 
-def haversine(raio, phi1, lambda1, phi2, lambda2):
+def haversine( raio, phi1, lambda1, phi2, lambda2):
     
     phi1_rad = math.radians(phi1)
     phi2_rad = math.radians(phi2)
@@ -82,7 +82,7 @@ def continuar ():
 
 
 
-def inventario(cores_usadas,distancias, tentativas,letrasusadas,dica3,dica4,dica5):
+def inventario( cores_usadas, distancias, tentativas, letrasusadas, dica3, dica4, dica5):
     dicas_usadas={
         "cores": cores_usadas,
         "letra": letrasusadas,
@@ -114,7 +114,7 @@ def inventario(cores_usadas,distancias, tentativas,letrasusadas,dica3,dica4,dica
 
 
 # funcao da dica             
-def funcao_dica(tentativas,dadosnormalizados,sorteado,lista_cores,letrascapital,areausada,popusada,contusada):
+def funcao_dica( tentativas, dadosnormalizados, sorteado, lista_cores, letrascapital, areausada, popusada, contusada):
     tentativasgastas=0
     cor = "1. Cor da bandeira  - custa 4 tentativas"
     letra = "2. Letra da capital - custa 3 tentativas"
@@ -145,7 +145,7 @@ def funcao_dica(tentativas,dadosnormalizados,sorteado,lista_cores,letrascapital,
     return " "
 
 
-def faz_lista_cores(dadosnormalizados,sorteado):
+def faz_lista_cores( dadosnormalizados, sorteado):
     lista_cores=[]
     cordabandeira = dadosnormalizados[sorteado]["bandeira"]
     for cor, num in cordabandeira.items():
@@ -153,14 +153,14 @@ def faz_lista_cores(dadosnormalizados,sorteado):
             lista_cores.append(cor)
     return lista_cores
 
-def dica_1(lista_cores,coresusadas):
+def dica_1( lista_cores, coresusadas):
     corsorteada = random.choice(lista_cores)
     lista_cores.remove(corsorteada)
     coresusadas.append(corsorteada)
     
     return [corsorteada,lista_cores,coresusadas]
 
-def faz_lista_letras(dadosnormalizados,sorteado):
+def faz_lista_letras( dadosnormalizados, sorteado):
     letrascapital = []
     capital = dadosnormalizados[sorteado]["capital"]
     for i in capital:
@@ -168,21 +168,21 @@ def faz_lista_letras(dadosnormalizados,sorteado):
     return letrascapital
 
 
-def dica_2(dadosnormalizados, sorteado,letrasusadas):
+def dica_2( dadosnormalizados, sorteado, letrasusadas):
 
     capital = dadosnormalizados[sorteado]["capital"]
 
-    x=sorteia_letra(capital, letrasusadas)
+    x=sorteia_letra( capital, letrasusadas)
     return x
 
-def dica_3(dadosnormalizados,sorteado):
+def dica_3( dadosnormalizados, sorteado):
     area=str(dadosnormalizados[sorteado]["area"])
     return area
 
-def dica_4(dadosnormalizados,sorteado):
+def dica_4( dadosnormalizados, sorteado):
     populacao=str(dadosnormalizados[sorteado]["populacao"])
     return populacao
 
-def dica_5(dadosnormalizados,sorteado):
+def dica_5( dadosnormalizados, sorteado):
     cont=str(dadosnormalizados[sorteado]["continente"])
     return cont

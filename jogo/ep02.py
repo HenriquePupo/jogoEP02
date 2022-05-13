@@ -16,7 +16,7 @@ while jogando:
     distancias=" "
     sorteado = funcoes.sorteia_pais(dadosnormalizados)
     print(sorteado)
-    lista_cores=funcoes.faz_lista_cores(dadosnormalizados,sorteado)
+    lista_cores = funcoes.faz_lista_cores(dadosnormalizados,sorteado)
     dicas_usadas = []
     vezes_usada = 0
     cores_usadas = []
@@ -51,48 +51,55 @@ while jogando:
 
         elif resposta in dadosnormalizados.keys():
             distancia = funcoes.haversine(EARTH_RADIUS, dadosnormalizados[sorteado]["geo"]["latitude"], dadosnormalizados[sorteado]["geo"]["longitude"], dadosnormalizados[resposta]["geo"]["latitude"], dadosnormalizados[resposta]["geo"]["longitude"] )
+            if 0 < distancia <= 999:
+                print('\033[1;36m{0} km -> {1}\033[m'.format(int(distancia), resposta))  
+            elif 1999 <= distancia <= 1000:
+                print('\033[1;33m{0} km -> {1}\033[m'.format(int(distancia), resposta))
+            elif 4999 <= distancia <= 2000:
+                print('\033[1;31m{0} km -> {1}\033[m'.format(int(distancia), resposta))
+            elif 9999 <= distancia <= 5000:
+                print('\033[1;35m{0} km -> {1}\033[m'.format(int(distancia), resposta))
+            else:
+                print('\033[1;37m{0} km -> {1}\033[m'.format(int(distancia), resposta))
             
-            print("{} Km -> {}".format(int(distancia),resposta))
-            tentativas -= 1   
+
+            tentativas -= 1
+
 
         elif resposta not in dadosnormalizados.keys() and resposta != "dica":
             print('pais desconhecido')
 
-        elif resposta == "dica":
+        elif resposta == "dica":     
             print("")
-            funcao_dicas = funcoes.funcao_dica(tentativas, dados, sorteado,lista_cores,letrascapital,areausada,popusada,contusada)
+            funcao_dicas = funcoes.funcao_dica( tentativas, dados, sorteado, lista_cores, letrascapital, areausada, popusada, contusada)
             print("")
             resposta = input("escolha: ")
             if resposta == "1" and lista_cores != [] and tentativas > 4:
-                dica1 = funcoes.dica_1(lista_cores,cores_usadas)
+                dica1 = funcoes.dica_1( lista_cores, cores_usadas)
                 lista_cores = dica1[1]
                 tentativas -= 4
 
             if resposta == "2" and letrascapital != [] and tentativas > 3:
-                dica2=funcoes.dica_2(dadosnormalizados,sorteado, letrasusadas)
+                dica2 = funcoes.dica_2( dadosnormalizados, sorteado, letrasusadas)
                 letrascapital.remove(dica2)
                 letrasusadas.append(dica2)
                 tentativas -= 3
             
-            if resposta == "3" and areausada==0 and tentativas > 6:
-                dica3 = funcoes.dica_3(dadosnormalizados,sorteado)
+            if resposta == "3" and areausada == 0 and tentativas > 6:
+                dica3 = funcoes.dica_3( dadosnormalizados, sorteado)
                 areausada+=1
                 tentativas -= 6
 
-            if resposta == "4" and popusada==0 and tentativas > 5:
-                dica4=funcoes.dica_4(dadosnormalizados,sorteado)
+            if resposta == "4" and popusada == 0 and tentativas > 5:
+                dica4 = funcoes.dica_4( dadosnormalizados, sorteado)
                 popusada += 1
                 tentativas -= 5
             
             if resposta == "5" and contusada==0 and tentativas > 7:
-                dica5=funcoes.dica_5(dadosnormalizados, sorteado)
+                dica5 = funcoes.dica_5( dadosnormalizados, sorteado)
                 contusada += 1
                 tentativas -= 7
 
     print("")
     print("voce perdeu o pais era: {}".format(sorteado))
     print("")
-
-
-                
-        

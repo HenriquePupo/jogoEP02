@@ -74,15 +74,15 @@ def haversine( raio, phi1, lambda1, phi2, lambda2):
 def continuar ():
     resposta = input('Quer continuar?[s/n]')
     if resposta == 'n':
-        print('Ate a proxima!')
+        return ('n')
     if resposta == 's':
-        print('Um pais foi escolhido')
+        return ('s')
     else:
         print('escolha outra resposta')
 
 
 
-def inventario( cores_usadas, distancias, tentativas, letrasusadas, dica3, dica4, dica5):
+def inventario( cores_usadas, distancias, tentativas, letrasusadas, dica3, dica4, dica5, ordempaises):
     dicas_usadas={
         "cores": cores_usadas,
         "letra": letrasusadas,
@@ -93,7 +93,13 @@ def inventario( cores_usadas, distancias, tentativas, letrasusadas, dica3, dica4
     
     print("-----------------------------")
     print("INVENTARIO:")
-    print("distâncias: ")
+    print("distancias: ")
+    i=0
+    while i < len(ordempaises):
+        p=str(ordempaises[i][0])
+        d=str(ordempaises[i][1])
+        print(" {}".format(p +" -> "+ d))
+        i+=1
     print(" ")
     print("dicas: ")  
     if cores_usadas!= []: 

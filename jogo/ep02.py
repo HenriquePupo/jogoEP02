@@ -29,6 +29,8 @@ while jogando:
     dica4 = ""
     contusada = 0
     dica5=""
+    paisesresposta=[]
+    ordempaises=[]
     print("-----------------------------")
     print("| Bem Vindo ao acerta pais   |")
     print("-----------------------------")
@@ -37,36 +39,39 @@ while jogando:
     print(" desisto  - desiste do jogo")
     print("----------------------------------------")
     print("")
-    
+    rodajogo = True
 
-    while tentativas > 0:
+    while rodajogo:
         
-        (funcoes.inventario(cores_usadas,distancias,tentativas,letrasusadas,dica3,dica4,dica5))
+        (funcoes.inventario(cores_usadas,distancias,tentativas,letrasusadas,dica3,dica4,dica5,ordempaises))
         
         resposta = input('Qual seu palpite?: ')
 
         if resposta == sorteado:
+            print("")
             print('voce acertou')
-            jogando = False
+            print("")
+            rodajogo = False
+
+        if resposta == "desisto":
+            desistir = input('Quer desistir?[s/n]')
+            if desistir == 'n':
+                print(" ok ")
+            if desistir == 's':
+                print('Ate a proxima!')
+                rodajogo = False
+            else:
+                print('escolha outra resposta')
+                
+            
 
         elif resposta in dadosnormalizados.keys():
             distancia = funcoes.haversine(EARTH_RADIUS, dadosnormalizados[sorteado]["geo"]["latitude"], dadosnormalizados[sorteado]["geo"]["longitude"], dadosnormalizados[resposta]["geo"]["latitude"], dadosnormalizados[resposta]["geo"]["longitude"] )
-            if 0 < distancia <= 999:
-                print('\033[1;36m{0} km -> {1}\033[m'.format(int(distancia), resposta))  
-            elif 1999 <= distancia <= 1000:
-                print('\033[1;33m{0} km -> {1}\033[m'.format(int(distancia), resposta))
-            elif 4999 <= distancia <= 2000:
-                print('\033[1;31m{0} km -> {1}\033[m'.format(int(distancia), resposta))
-            elif 9999 <= distancia <= 5000:
-                print('\033[1;35m{0} km -> {1}\033[m'.format(int(distancia), resposta))
-            else:
-                print('\033[1;37m{0} km -> {1}\033[m'.format(int(distancia), resposta))
-            
-
+            ordempaises = funcoes.adiciona_em_ordem(resposta, int(distancia), paisesresposta)
             tentativas -= 1
 
 
-        elif resposta not in dadosnormalizados.keys() and resposta != "dica":
+        elif resposta not in dadosnormalizados.keys() and resposta != "dica" and resposta!= "desisto":
             print('pais desconhecido')
 
         elif resposta == "dica":     
@@ -84,7 +89,7 @@ while jogando:
                 letrascapital.remove(dica2)
                 letrasusadas.append(dica2)
                 tentativas -= 3
-            
+        
             if resposta == "3" and areausada == 0 and tentativas > 6:
                 dica3 = funcoes.dica_3( dadosnormalizados, sorteado)
                 areausada+=1
@@ -99,7 +104,22 @@ while jogando:
                 dica5 = funcoes.dica_5( dadosnormalizados, sorteado)
                 contusada += 1
                 tentativas -= 7
+        if tentativas == 0:
+            print("")
+            print("voce perdeu")
+            print("")
+            rodajogo = False
 
     print("")
-    print("voce perdeu o pais era: {}".format(sorteado))
+    print(" o pais era: {}".format(sorteado))
     print("")
+    
+    x=funcoes.continuar()
+    if x == "n":
+        print("")
+        print("Ate a proxima!")
+        jogando = False
+    if x == "s":
+        print("")
+        print(" Novo pais sorteado ")
+        print("")

@@ -114,7 +114,7 @@ while jogando:
                 tentativasusadas+=7
         if tentativas == 0:
             print("")
-            print("---------------VOCE PERDEUKKKKKKKKKKKKK--------------")
+            print("---------------VOCE PERDEU--------------")
             print("")
             rodajogo = False
 

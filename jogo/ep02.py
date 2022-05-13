@@ -15,7 +15,6 @@ while jogando:
     tentativas = 20
     distancias=" "
     sorteado = funcoes.sorteia_pais(dadosnormalizados)
-    print(sorteado)
     lista_cores = funcoes.faz_lista_cores(dadosnormalizados,sorteado)
     dicas_usadas = []
     vezes_usada = 0
@@ -39,6 +38,7 @@ while jogando:
     print(" desisto  - desiste do jogo")
     print("----------------------------------------")
     print("")
+    tentativasusadas=0
     rodajogo = True
 
     while rodajogo:
@@ -49,12 +49,12 @@ while jogando:
 
         if resposta == sorteado:
             print("")
-            print('voce acertou')
+            print('-----PARABENS! voce acertou em {} tentativas------'.format(tentativasusadas))
             print("")
             rodajogo = False
 
         if resposta == "desisto":
-            desistir = input('Quer desistir?[s/n]')
+            desistir = input('Quer desistir?[s/n] ')
             if desistir == 'n':
                 print(" ok ")
             if desistir == 's':
@@ -69,10 +69,13 @@ while jogando:
             distancia = funcoes.haversine(EARTH_RADIUS, dadosnormalizados[sorteado]["geo"]["latitude"], dadosnormalizados[sorteado]["geo"]["longitude"], dadosnormalizados[resposta]["geo"]["latitude"], dadosnormalizados[resposta]["geo"]["longitude"] )
             ordempaises = funcoes.adiciona_em_ordem(resposta, int(distancia), paisesresposta)
             tentativas -= 1
+            tentativasusadas+=1
 
 
         elif resposta not in dadosnormalizados.keys() and resposta != "dica" and resposta!= "desisto":
+            print("")
             print('pais desconhecido')
+            print("")
 
         elif resposta == "dica":     
             print("")
@@ -83,30 +86,35 @@ while jogando:
                 dica1 = funcoes.dica_1( lista_cores, cores_usadas)
                 lista_cores = dica1[1]
                 tentativas -= 4
+                tentativasusadas+=4
 
             if resposta == "2" and letrascapital != [] and tentativas > 3:
                 dica2 = funcoes.dica_2( dadosnormalizados, sorteado, letrasusadas)
                 letrascapital.remove(dica2)
                 letrasusadas.append(dica2)
                 tentativas -= 3
+                tentativasusadas+=3
         
             if resposta == "3" and areausada == 0 and tentativas > 6:
                 dica3 = funcoes.dica_3( dadosnormalizados, sorteado)
                 areausada+=1
                 tentativas -= 6
+                tentativasusadas+=6
 
             if resposta == "4" and popusada == 0 and tentativas > 5:
                 dica4 = funcoes.dica_4( dadosnormalizados, sorteado)
                 popusada += 1
                 tentativas -= 5
+                tentativasusadas+=5
             
             if resposta == "5" and contusada==0 and tentativas > 7:
                 dica5 = funcoes.dica_5( dadosnormalizados, sorteado)
                 contusada += 1
                 tentativas -= 7
+                tentativasusadas+=7
         if tentativas == 0:
             print("")
-            print("voce perdeu")
+            print("---------------VOCE PERDEUKKKKKKKKKKKKK--------------")
             print("")
             rodajogo = False
 
@@ -121,5 +129,5 @@ while jogando:
         jogando = False
     if x == "s":
         print("")
-        print(" Novo pais sorteado ")
+        print(" -------Novo pais sorteado------- ")
         print("")

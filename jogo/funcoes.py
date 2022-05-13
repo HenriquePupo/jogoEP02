@@ -97,8 +97,20 @@ def inventario( cores_usadas, distancias, tentativas, letrasusadas, dica3, dica4
     i=0
     while i < len(ordempaises):
         p=str(ordempaises[i][0])
-        d=str(ordempaises[i][1])
-        print(" {}".format(p +" -> "+ d))
+        d=int(ordempaises[i][1])
+        dist=str(ordempaises[i][1])
+        x=""
+        if 0 < d <= 999:
+            x = '\033[36m{}\033[m'.format(p + " -> "+ dist + "km")
+        elif 1999 >= d >= 1000:
+            x = '\033[33m{}\033[m'.format(p + " -> "+ dist + "km")    
+        elif 4999 >= d >= 2000:
+            x = '\033[31m{}\033[m'.format(p + " -> "+ dist + "km")      
+        elif 9999 >= d >= 5000:
+            x = '\033[35m{}\033[m'.format(p + " -> "+ dist + "km")     
+        else:
+            x = '\033[37m{}\033[m'.format(p + " -> "+ dist + "km")     
+        print(" {}".format(x))
         i+=1
     print(" ")
     print("dicas: ")  
